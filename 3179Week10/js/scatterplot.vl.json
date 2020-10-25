@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 500,
+  "height": 400,
+  "title": "Unemployment Rate versus Individuals using the Internet per Country",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179%20w9%20hw/data/country_profile_variables.csv"
+  },
+  "params": [
+    {
+      "name": "Region_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Carribbean",
+          "CentralAmerica",
+          "CentralAsia",
+          "EasternAfrica",
+          "EasternAsia",
+          "EasternEurope",
+          "Melanesia",
+          "Micronesia",
+          "MiddleAfrica",
+          "NorthernAfrica",
+          "NorthernAmerica",
+          "NorthernEurope",
+          "Oceania",
+          "Polynesia",
+          "South-easternAsia",
+          "SouthAmerica",
+          "SouthernAfrica",
+          "SouthernAsia",
+          "SouthernEurope",
+          "WesternAfrica",
+          "westernAsia",
+          "WesternEurope"
+        ],
+        "labels": [
+          "Show All",
+          "Carribbean",
+          "CentralAmerica",
+          "CentralAsia",
+          "EasternAfrica",
+          "EasternAsia",
+          "EasternEurope",
+          "Melanesia",
+          "Micronesia",
+          "MiddleAfrica",
+          "NorthernAfrica",
+          "NorthernAmerica",
+          "NorthernEurope",
+          "Oceania",
+          "Polynesia",
+          "South-easternAsia",
+          "SouthAmerica",
+          "SouthernAfrica",
+          "SouthernAsia",
+          "SouthernEurope",
+          "WesternAfrica",
+          "westernAsia",
+          "WesternEurope"
+        ],
+        "name": "Region Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum['Unemployment (Percentage of labour force)'] > 0"},
+    {
+      "filter": "datum['Individuals using the Internet (per 100 inhabitants)'] > 0"
+    },
+    {"filter": "Region_selection == null || datum.Region == Region_selection"}
+  ],
+  "encoding": {
+    "x": {
+      "field": "Individuals using the Internet (per 100 inhabitants)",
+      "type": "quantitative",
+      "axis": {"tickCount": 7}
+    },
+    "y": {
+      "field": "Unemployment (Percentage of labour force)",
+      "type": "quantitative",
+      "axis": {"tickCount": 7}
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "Population in thousands (2017)",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [100, 500, 1000, 5000, 10000],
+            "range": [10, 30, 70, 150, 300, 500]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "color": {"field": "Region", "type": "nominal"},
+        "opacity": {"value": 0.7},
+        "tooltip": [
+          {"field": "country", "type": "nominal"},
+          {
+            "field": "Population in thousands (2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "Population density (per km2, 2017)",
+            "type": "quantitative",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['country'] == 'China' || datum['country'] == 'Singapore' || datum['country'] == 'Australia' || datum['country'] == 'Italy' || datum['country'] == 'Yemen' || datum['country'] == 'United States'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "country", "type": "nominal"},
+          {
+            "field": "Population in thousands (2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "Population density (per km2, 2017)",
+            "type": "quantitative",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
