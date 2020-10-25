@@ -1,7 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
-  "width": 500,
-  "height": 400,
   "title": "Unemployment Rate versus Individuals using the Internet per Country",
   "data": {
     "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179%20w9%20hw/data/country_profile_variables.csv"
