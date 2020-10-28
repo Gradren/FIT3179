@@ -1,0 +1,27 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 400,
+  "height": 400,
+  "title": "Boxplot Of Employment Rate For Industry By Region",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "transform": [
+    {"filter": "datum['Employment: Industry (Percentage of employed)'] > 0"}
+  ],
+  "layer": [
+    {
+      "mark": {"type": "boxplot", "extent": "min-max"},
+      "encoding": {
+        "y": {"field": "Region", "type": "nominal"},
+        "color": {"field": "Region", "type": "nominal", "legend": null},
+        "x": {
+          "field": "Employment: Industry (Percentage of employed)",
+          "type": "quantitative",
+          "scale": {"zero": false}
+        }
+      }
+    }
+  ],
+  "config": {}
+}

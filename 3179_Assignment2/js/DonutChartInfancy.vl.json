@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "Percentage of Infant Mortality Rates Across Continents",
+  "description": "A simple donut chart with embedded data.",
+  "width": 300,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "median",
+          "field": "Infant mortality rate (per 1000 live births)",
+          "as": "Infant mortality rate"
+        }
+      ],
+      "groupby": ["Continent"]
+    }
+  ],
+  "encoding": {
+    "color": {"field": "Continent", "type": "nominal"},
+    "theta": {
+      "field": "Infant mortality rate",
+      "type": "quantitative",
+      "stack": true
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 90},
+      "selection": {
+        "highlight": {"type": "single", "empty": "none", "on": "mouseover"},
+        "select": {"type": "multi"}
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "Continent", "type": "ordinal"},
+          {
+            "field": "Infant mortality rate",
+            "title": "Infant mortality rate (%)",
+            "type": "quantitative",
+            "format": ","
+          }
+        ],
+        "fillOpacity": {
+          "condition": {"selection": "select", "value": 1},
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "outerRadius": 110,
+        "dx": 0,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "stroke": "black"
+      },
+      "encoding": {
+        "text": {"field": "Infant mortality rate", "type": "quantitative"},
+        "fillOpacity": {
+          "condition": {"selection": "select", "value": 1},
+          "value": 0.3
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "test": {
+                "and": [
+                  {"selection": "select"},
+                  "length(data(\"select_store\"))"
+                ]
+              },
+              "value": 1
+            },
+            {"selection": "highlight", "value": 1}
+          ],
+          "value": 0
+        }
+      }
+    }
+  ],
+  "view": {"stroke": null},
+  "config": {}
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 400,
+  "height": 300,
+  "title": "Percentage Of Tertiary Education gross enrol ratio for males per 100 Population",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum['Education: Tertiary gross enrol. ratio (m per 100 pop.)'] > 0"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "median",
+          "field": "Education: Tertiary gross enrol. ratio (m per 100 pop.)",
+          "as": "Tertiary Education gross enrol ratio for males per 100 Population"
+        }
+      ],
+      "groupby": ["Continent"]
+    }
+  ],
+  "encoding": {
+    "y": {"field": "Continent", "type": "ordinal"},
+    "x": {
+      "field": "Tertiary Education gross enrol ratio for males per 100 Population",
+      "type": "quantitative",
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": "bar",
+      "selection": {
+        "highlight": {"type": "single", "empty": "none", "on": "mouseover"},
+        "select": {"type": "multi"}
+      },
+      "encoding": {
+        "color": {"field": "Continent"},
+        "fillOpacity": {
+          "condition": {"selection": "select", "value": 1},
+          "value": 0.3
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "test": {
+                "and": [
+                  {"selection": "select"},
+                  "length(data(\"select_store\"))"
+                ]
+              },
+              "value": 2
+            },
+            {"selection": "highlight", "value": 1}
+          ],
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Continent", "type": "ordinal"},
+          {
+            "field": "Tertiary Education gross enrol ratio for males per 100 Population",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Tertiary Education gross enrol ratio for males per 100 Population (%)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 3,
+        "fontSize": 11.5,
+        "fontStyle": "italic",
+        "stroke": "black"
+      },
+      "encoding": {
+        "text": {
+          "field": "Tertiary Education gross enrol ratio for males per 100 Population",
+          "type": "quantitative"
+        },
+        "fillOpacity": {
+          "condition": {"selection": "select", "value": 1},
+          "value": 0.3
+        },
+        "strokeWidth": {
+          "condition": [
+            {
+              "test": {
+                "and": [
+                  {"selection": "select"},
+                  "length(data(\"select_store\"))"
+                ]
+              },
+              "value": 1
+            },
+            {"selection": "highlight", "value": 1}
+          ],
+          "value": 0
+        }
+      }
+    }
+  ],
+  "view": {"stroke": null},
+  "config": {}
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 400,
+  "height": 400,
+  "title": "Boxplot Of Employment Rate For Agriculture By Region",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "mark": {"type": "boxplot", "extent": "min-max"},
+  "transform": [
+    {"filter": "datum['Employment: Agriculture (Percentage of employed)'] > 0"}
+  ],
+  "encoding": {
+    "y": {"field": "Region", "type": "nominal"},
+    "color": {"field": "Region", "type": "nominal", "legend": null},
+    "x": {
+      "field": "Employment: Agriculture (Percentage of employed)",
+      "type": "quantitative",
+      "scale": {"zero": false}
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 400,
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "transform": [
+    {
+      "filter": "datum['Education: Tertiary gross enrol. ratio (f per 100 pop.)'] > 0"
+    },
+    {
+      "filter": "datum['Education: Secondary gross enrol. ratio (f per 100 pop.)'] > 0"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "median",
+          "field": "Education: Primary gross enrol. ratio (f per 100 pop.)",
+          "as": "Primary Education gross enrol ratio for females"
+        }
+      ],
+      "groupby": ["Continent"]
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "y": {"field": "Continent", "type": "ordinal"},
+    "x": {
+      "field": "Primary Education gross enrol ratio for females",
+      "type": "quantitative"
+    },
+    "color": {"field": "Continent"}
+  },
+  "config": {}
+}

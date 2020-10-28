@@ -1,0 +1,154 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 500,
+  "height": 400,
+  "title": "Imports And Exports Of International Trade For Every Country By Continent",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+  },
+  "params": [
+    {
+      "name": "Continent_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Caribbean",
+          "America",
+          "Asia",
+          "Africa",
+          "Europe",
+          "Melanesia",
+          "Micronesia",
+          "Oceania"
+        ],
+        "labels": [
+          "Show All",
+          "Caribbean",
+          "America",
+          "Asia",
+          "Africa",
+          "Europe",
+          "Melanesia",
+          "Micronesia",
+          "Oceania"
+        ],
+        "name": "Continent Selection: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum['International trade: Exports (million US$)'] > 0"},
+    {"filter": "datum['International trade: Imports (million US$)'] > 0"},
+    {
+      "filter": "Continent_selection == null || datum.Continent == Continent_selection"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "International trade: Exports (million US$)",
+      "type": "quantitative",
+      "axis": {"tickCount": 5, "grid": false},
+      "scale": {"type": "log"}
+    },
+    "y": {
+      "field": "International trade: Imports (million US$)",
+      "type": "quantitative",
+      "axis": {"tickCount": 5, "grid": false},
+      "scale": {"type": "log"}
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "selection": {
+        "highlight": {"type": "single", "empty": "none", "on": "mouseover"},
+        "select": {"type": "multi"},
+        "choose": {"type": "interval", "bind": "scales"}
+      },
+      "encoding": {
+        "size": {
+          "field": "Population in thousands (2017)",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [100, 500, 1000, 5000, 10000],
+            "range": [50, 100, 150, 250, 400, 650]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "color": {"field": "Continent", "type": "nominal"},
+        "opacity": {"value": 0.7},
+        "tooltip": [
+          {"field": "country", "type": "nominal"},
+          {
+            "field": "Population in thousands (2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "Population density (per km2, 2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "International trade: Exports (million US$)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "International trade: Imports (million US$)",
+            "type": "quantitative",
+            "format": ","
+          }
+        ],
+        "fillOpacity": {
+          "condition": {"selection": "select", "value": 1},
+          "value": 0
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "country", "type": "nominal"},
+        "color": {"value": "black"},
+        "tooltip": [
+          {"field": "country", "type": "nominal"},
+          {
+            "field": "Population in thousands (2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "Population density (per km2, 2017)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "International trade: Exports (million US$)",
+            "type": "quantitative",
+            "format": ","
+          },
+          {
+            "field": "International trade: Imports (million US$)",
+            "type": "quantitative",
+            "format": ","
+          }
+        ],
+        "fillOpacity": {
+          "condition": {"selection": "highlight", "value": 1},
+          "value": 0
+        }
+      }
+    }
+  ],
+  "config": {}
+}
