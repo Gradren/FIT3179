@@ -3,7 +3,7 @@
   "title": "Percentage of Infant Mortality Rates Across Continents",
   "description": "A simple donut chart with embedded data.",
   "width": 300,
-  "height": 300,
+  "height": 250,
   "data": {
     "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
   },
