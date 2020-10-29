@@ -1,5 +1,6 @@
 body {
     color: #777;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 /*
 Add transition to containers so they can push in and out.
@@ -63,6 +64,7 @@ The content `<div>` is where all your content goes.
     margin: 50px 0 20px 0;
     font-weight: 300;
     color: #888;
+    font-style: italic;
 }
 
 
