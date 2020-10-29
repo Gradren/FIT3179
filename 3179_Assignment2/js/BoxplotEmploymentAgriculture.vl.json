@@ -11,12 +11,13 @@
     {"filter": "datum['Employment: Agriculture (Percentage of employed)'] > 0"}
   ],
   "encoding": {
-    "y": {"field": "Region", "type": "nominal"},
+    "y": {"field": "Region", "type": "nominal", "axis": {"grid": false}},
     "color": {"field": "Region", "type": "nominal", "legend": null},
     "x": {
       "field": "Employment: Agriculture (Percentage of employed)",
       "type": "quantitative",
-      "scale": {"zero": false}
+      "scale": {"zero": false},
+      "axis": {"grid": false}
     }
   },
   "config": {}
