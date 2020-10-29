@@ -7,6 +7,11 @@ body {
     height: auto;
 }
 
+#bar_chart {
+    height: auto;
+    width: auto;
+}
+
 /*
 Add transition to containers so they can push in and out.
 */
