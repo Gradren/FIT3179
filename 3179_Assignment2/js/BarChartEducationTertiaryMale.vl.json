@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
    "width": 300,
   "height": 250,
-  "title": "Percentage Of Tertiary Education gross enrol ratio for males per 100 Population",
+  "title": "Percentage Of Tertiary Education Gross Enrol Ratio For Males",
   "data": {
     "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
   },
