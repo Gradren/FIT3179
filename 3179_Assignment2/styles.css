@@ -7,11 +7,6 @@ body {
     height: auto;
 }
 
-#bar_chart {
-    height: auto;
-    width: auto;
-}
-
 /*
 Add transition to containers so they can push in and out.
 */
@@ -72,6 +67,7 @@ The content `<div>` is where all your content goes.
     }
 
 .content-subhead {
+    font-size: 3.2vw;
     margin: 50px 0 20px 0;
     font-weight: 300;
     color: #888;
