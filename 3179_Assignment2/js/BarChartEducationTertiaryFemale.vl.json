@@ -40,7 +40,7 @@
         "select": {"type": "multi"}
       },
       "encoding": {
-        "color": {"field": "Continent"},
+        "color": {"field": "Continent", "legend": null},
         "fillOpacity": {
           "condition": {"selection": "select", "value": 1},
           "value": 0.3
