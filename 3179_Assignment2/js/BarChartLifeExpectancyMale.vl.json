@@ -4,7 +4,7 @@
   "height": 250,
   "title": "Life Expectancy At Birth For Males By Continent",
   "data": {
-    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179Week10/data/country_profile_variables.csv"
+    "url": "https://raw.githubusercontent.com/Gradren/FIT3179/main/3179_Assignment2/data/country_profile_variables.csv"
   },
   "transform": [
     {"filter": "datum['Life expectancy at birth (males, years)'] > 0"},
