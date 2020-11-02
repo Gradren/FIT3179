@@ -20,14 +20,12 @@
             "key": "country",
             "fields": [
               "CO2 emission estimates (million tons per capita)",
-              "Forested area (Percentage of land area)"
+              "Forested area (Percentage of land area)",
+              "Threatened species (number)"
             ]
           }
         },
-        {
-          "calculate": "datum['CO2 emission estimates (million tons per capita)']/datum['Population in thousands (2017)'] * 10000",
-          "as": "CO2 emission estimates per 1000 population"
-        }
+        {"filter": "datum['CO2 emission estimates (million tons per capita)'] > 0"}
       ],
       "mark": {"type": "geoshape", "stroke": "#757575", "strokeWidth": 0.5},
       "selection": {
@@ -52,6 +50,10 @@
           },
           {
             "field": "Forested area (Percentage of land area)",
+            "type": "quantitative"
+          },
+          {
+            "field": "Threatened species (number)",
             "type": "quantitative"
           }
         ],
